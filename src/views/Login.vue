@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <HomeComponent />
+    <LoginComponent />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HomeComponent from '@/components/HomeComponent.vue';
+import LoginComponent from '@/components/LoginComponent.vue';
 
 export default {
-  name: 'Home',
+  name: 'Login',
   components: {
     // eslint-disable-next-line vue/no-unused-components
-    HomeComponent,
+    LoginComponent,
   },
 };
 </script>
