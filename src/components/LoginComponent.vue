@@ -21,7 +21,7 @@
             <v-toolbar-title>Login form</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-form v-model="form.valid" :lazy-validation="lazy" ref="form">
+            <v-form v-model="form.valid" ref="form">
               <v-text-field
                 label="Login"
                 name="login"
@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
+
 export default {
   name: 'LoginComponent',
   data: () => ({
@@ -67,11 +69,15 @@ export default {
       passwordRules: [(v) => !!v || 'Password is required'],
     },
   }),
+  computed: {
+    ...mapState('account', ['loggedIn', 'currentUser']),
+  },
   methods: {
+    ...mapActions('account', ['login', 'getCurrentUser']),
     handleLogin() {
       if (this.$refs.form.validate()) {
-        localStorage.setItem('isAuthenticated', 'true');
-        this.$router.push({ name: 'Home' });
+        this.login({ username: this.form.login, password: this.form.password })
+          .then(() => this.$router.push({ name: 'Home' }));
       }
     },
   },

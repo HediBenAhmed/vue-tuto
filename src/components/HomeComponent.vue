@@ -105,6 +105,7 @@
       <v-btn
         icon
         large
+        @click="handleLogout"
       >
         <v-avatar
           size="32px"
@@ -226,6 +227,8 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
+
 export default {
   name: 'HomeComponent',
 
@@ -265,5 +268,15 @@ export default {
       { icon: 'mdi-keyboard', text: 'Go to the old version' },
     ],
   }),
+  computed: {
+    ...mapState('account', ['loggedIn', 'currentUser']),
+  },
+  methods: {
+    ...mapActions('account', ['logout', 'getCurrentUser']),
+    handleLogout() {
+      this.logout();
+      this.$router.push({ name: 'Login' });
+    },
+  },
 };
 </script>
