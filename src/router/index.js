@@ -11,7 +11,7 @@ const routes = [
     name: 'Home',
     component: Home,
     beforeEnter(to, from, next) {
-      const isAuthenticated = localStorage.getItem('isAuthenticated');
+      const isAuthenticated = sessionStorage.getItem('isAuthenticated');
       if (!isAuthenticated) next('/login');
       else next();
     },
