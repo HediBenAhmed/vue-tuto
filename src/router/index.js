@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
+import ChartsComponent from '../components/MyChartComponent.vue';
 
 Vue.use(VueRouter);
 
@@ -15,11 +16,9 @@ const routes = [
       if (!isAuthenticated) next('/login');
       else next();
     },
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login,
+    children: [
+      { path: 'charts', component: ChartsComponent },
+    ],
   },
   {
     path: '/login',
